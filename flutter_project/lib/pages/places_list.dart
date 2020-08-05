@@ -1,43 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/model/location.dart';
 import 'package:flutter_project/model/location_table.dart';
+import 'package:geolocator/geolocator.dart';
 
 class PlacesList extends StatefulWidget {
+
+  Position devicePosition;
+  List<Location> locations;
+
+  PlacesList({Key key, @required this.devicePosition,@required this.locations}) :super(key: key);
+
   @override
-  _PlacesListState createState() => _PlacesListState();
+  _PlacesListState createState() => _PlacesListState(devicePosition: devicePosition,locations:locations);
 }
 
 class _PlacesListState extends State<PlacesList> {
 
+  Position devicePosition;
   List<Location> locations;
-
-  void prepareLocations() {
-    List<LocationTable> tables = [
-      LocationTable(1, TableLocation.inside, 3),
-      LocationTable(2, TableLocation.inside, 2),
-      LocationTable(3, TableLocation.inside, 4),
-      LocationTable(4, TableLocation.inside, 4),
-      LocationTable(5, TableLocation.inside, 2),
-      LocationTable(6, TableLocation.outside, 3),
-      LocationTable(7, TableLocation.outside, 6),
-      LocationTable(8, TableLocation.outside, 4),
-      LocationTable(9, TableLocation.outside, 2),
-      LocationTable(10, TableLocation.outside, 2),
-    ];
-
-    locations = [
-      Location(1, "Restaurant 1", tables),
-      Location(1, "Restaurant 2", tables),
-      Location(1, "Restaurant 3", tables),
-      Location(1, "Restaurant 4", tables),
-      Location(1, "Restaurant 5", tables),
-      Location(1, "Restaurant 6", tables),
-    ];
-  }
+  _PlacesListState({this.devicePosition,this.locations});
 
   @override
   Widget build(BuildContext context) {
-    prepareLocations();
+
     return ListView.builder(
       itemCount: locations.length,
       itemBuilder: (context, index) {
