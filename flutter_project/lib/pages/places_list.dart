@@ -26,6 +26,7 @@ class _PlacesListState extends State<PlacesList> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ListView.builder(
       itemCount: locations.length,
       itemBuilder: (context, index) {

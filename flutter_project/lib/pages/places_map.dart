@@ -34,11 +34,12 @@ class _PlacesMapState extends State<PlacesMap> with AutomaticKeepAliveClientMixi
 
     mapStyle = '[{"featureType":"administrative","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]}]';
 
-    markers = locations.map((location) => Marker(location.coordinates, info: location.name)).toSet();
+    markers = locations.map((location) => Marker(location.coordinates, info: location.name, infoSnippet: '${location.countOccupied()}/${location.tables.length} occupied')).toSet();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Stack(
       children: <Widget>[
         Positioned.fill(
